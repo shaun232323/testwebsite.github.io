@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Store - SouthCentral Hardware</title>
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Banner Styling */
+        .banner {
+            background-image: url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .shop-now-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        /* Product Section Styling */
+        .products {
+            padding: 50px;
+            background-color: white;
+        }
+
+        .products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-item {
+            width: 30%;
+            background-color: #f1f1f1;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-item img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .product-item h3 {
+            margin-top: 15px;
+            font-size: 20px;
+        }
+
+        .product-item p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: relative;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-item {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-item {
+                width: 100%;
+            }
+
+            .banner h1 {
+                font-size: 36px;
+            }
+
+            .shop-now-btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">SouthCentral Hardware</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner Section -->
+    <div class="banner">
+        <h1>High-Quality Hardware for Every Project</h1>
+        <p>Tools, Supplies, and Equipment to Get the Job Done</p>
+        <a href="#" class="shop-now-btn">Shop Now</a>
+    </div>
+
+    <!-- Product Section -->
+    <section class="products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="https://via.placeholder.com/300x200" alt="Power Drill">
+                <h3>Power Drill</h3>
+                <p>$99.99</p>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/300x200" alt="Hammer Set">
+                <h3>Hammer Set</h3>
+                <p>$29.99</p>
+            </div>
+            <div class="product-item">
+                <img src="https://via.placeholder.com/300x200" alt="Wrench Kit">
+                <h3>Wrench Kit</h3>
+                <p>$39.99</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 SouthCentral Hardware Distributors Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>

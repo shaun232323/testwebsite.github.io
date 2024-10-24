@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #00aaff, #0077ff);
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #0077ff;
+            font-weight: 700;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+            animation-delay: 0.2s;
+        }
+        .password-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #0077ff;
+            outline: none;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 20px;
+            color: #0077ff;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #0077ff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 0.4s;
+        }
+        button:hover {
+            background-color: #005bb5;
+            transform: translateY(-3px);
+        }
+        #loginLink {
+            margin-top: 20px;
+            color: #636e72;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 0.6s;
+        }
+        #loginLink:hover {
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="createAccountContainer">
+        <h2>Create Account</h2>
+        <form id="createAccountForm">
+            <input type="text" id="newUsername" placeholder="Username" required>
+            <div class="password-container">
+                <input type="password" id="newPassword" placeholder="Password" required>
+                <span class="eye-icon" id="togglePassword" onclick="togglePasswordVisibility('newPassword', 'togglePassword')">&#128065;</span>
+            </div>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <span class="eye-icon" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')">&#128065;</span>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <a>Already have an account? <a id="loginLink" href="login.html">Login</a></a>
+    </div>
+
+    <script>
+        const createAccountForm = document.getElementById("createAccountForm");
+
+        createAccountForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("newUsername").value;
+            const password = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            if (localStorage.getItem("username") === username) {
+                alert("An account with this username already exists!");
+                return;
+            }
+
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+
+            alert("Account created successfully! You can now log in.");
+            window.location.href = "login.html";
+        });
+
+        function togglePasswordVisibility(passwordFieldId, eyeIconId) {
+            const passwordField = document.getElementById(passwordFieldId);
+            const eyeIcon = document.getElementById(eyeIconId);
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.innerHTML = "&#128064;";
+            } else {
+                passwordField.type = "password";
+                eyeIcon.innerHTML = "&#128065;";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SouthCentral Hardware Distributors Inc.</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background: #f9f9f9;
+        }
+        header {
+            background: #036903;
+            color: #fff;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+            display: flex; /* Use flexbox for alignment */
+            justify-content: space-between; /* Space between elements */
+            align-items: center; /* Center vertically */
+        }
+        header.scrolled {
+            background: #222;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex; /* Use flexbox for alignment */
+            justify-content: space-between; /* Space between elements */
+            align-items: center; /* Center vertically */
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+        /* Button styling */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            transition: color 0.3s, transform 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .button:hover {
+            color: #000000;
+            transform: scale(1.05);
+        }
+        /* Logout button specific styling */
+        .logout-button {
+            background: #1cc540; /* Red background for logout */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .logout-button:hover {
+            background: #c9302c; /* Darker red on hover */
+            transform: scale(1.05);
+        }
+        .icon {
+            opacity: 0;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+        }
+        /* Show icon on hover and hide the button text */
+        .button-home:hover .icon.home-icon,
+        .button-about:hover .icon.about-icon,
+        .button-services:hover .icon.services-icon,
+        .button-shop:hover .icon.shop-icon,
+        .button-contact:hover .icon.contact-icon {
+            opacity: 1;
+        }
+        .text {
+            display: inline;
+        }
+        /* Hide text when icon is shown */
+        .button-home:hover .text,
+        .button-about:hover .text,
+        .button-services:hover .text,
+        .button-shop:hover .text,
+        .button-contact:hover .text {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .hero {
+            background: #036903;
+            color: #ffffff;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 5px;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #11940c;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .cta-button:hover {
+            background: #ffffff;
+            color: #000000;
+            transform: scale(1.05);
+        }
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .social-media {
+            margin-top: 10px;
+        }
+        .social-media a {
+            margin-right: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: #fff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+        }
+        form input, form textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background: #036903;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.6s;
+        }
+        form button:hover {
+            background: #ffffff;
+        }
+        .animate {
+            animation: scaleFade 0.5s forwards;
+        }
+        @keyframes scaleFade {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SouthCentral Hardware Distributors Inc.</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#home" class="button button-home">
+                            <span class="text">Home</span>
+                            <img src="Home.png" class="icon home-icon" alt="Home Icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" class="button button-about">
+                            <span class="text">About</span>
+                            <img src="QM.png" class="icon about-icon" alt="About Icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#services" class="button button-services">
+                            <span class="text">Services</span>
+                            <img src="Services.png" class="icon services-icon" alt="Services Icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="shop.html" class="button button-shop">
+                            <span class="text">Shop</span>
+                            <img src="Shop.png" class="icon shop-icon" alt="Shop Icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/southcentralhardware" class="button button-contact">
+                            <span class="text">Contact</span>
+                            <img src="Contact.png" class="icon contact-icon" alt="Contact Icon">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="logout-button" onclick="logout()">Logout</button> <!-- Logout Button -->
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home" class="hero">
+            <h2>Welcome to SouthCentral Hardware Distributors Inc.</h2>
+            <p>Your projects deserve the best. We supply the tools.</p>
+            <a href="#services" class="cta-button">Explore Our Services</a>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We are a team of professionals dedicated to providing top-notch hardware supplies and excellent customer service.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Web Design</li>
+                <li>Web Development</li>
+                <li>SEO Services</li>
+                <li>Digital Marketing</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Connect with us on social media:</p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/southcentralhardware" target="_blank" rel="noopener noreferrer">
+                    <img src="fblogo.png" alt="Facebook Logo" width="30" height="30">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                    <img src="instalogo.jfif" alt="Instagram Logo" width="30" height="30">
+                </a>
+            </div>  
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SouthCentral Hardware Distributors Inc. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function logout() {
+            alert("Logged out successfully!"); // Alert for demonstration
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

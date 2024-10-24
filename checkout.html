@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - SouthCentral Hardware Distributors Inc.</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="Shaun.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-button {
+            background-color: #28a745; /* Green */
+            margin-top: 10px;
+        }
+        .back-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+    </header>
+
+    <main>
+        <h2>Pay with Gcash</h2>
+        <form id="checkout-form">
+            <label for="account-name">Account Name</label>
+            <input type="text" id="account-name" required>
+
+            <label for="account-number">Account Number</label>
+            <input type="text" id="account-number" required maxlength="11" pattern="\d{11}" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+            <label for="routing-number">Gcash MPIN</label>
+            <input type="password" id="routing-number" required pattern="\d{4}" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" required>
+
+            <button type="submit">Submit Payment</button>
+            <button type="button" class="back-button" onclick="window.location.href='shop.html'">Back to Shop</button>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for demo
+
+            const accountName = document.getElementById('account-name').value;
+            const accountNumber = document.getElementById('account-number').value;
+            const routingNumber = document.getElementById('routing-number').value;
+            const amount = document.getElementById('amount').value;
+
+            // Simulate payment processing
+            alert(`Payment of $${amount} from account ${accountName} (Account No: ${accountNumber}) is being processed.`);
+
+            // Redirect to the thank-you page after a successful payment
+            window.location.href = 'thankyou.html'; // Adjust the URL as needed
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 SouthCentral Hardware Distributors Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>

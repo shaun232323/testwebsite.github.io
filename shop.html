@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SouthCentral Hardware Distributors Inc. - Shop</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="Shaun.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #036903;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #shop {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product {
+            position: relative;
+            background: #f1f1f1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            transition: transform 0.6s;
+            text-align: center;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .dot-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .delete-item, .edit-item {
+            display: none;
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+            opacity: 0; /* Start hidden */
+            transform: translateY(-10px); /* Slightly shift up */
+            transition: opacity 0.3s, transform 0.3s; /* Animate changes */
+        }
+        .delete-item.visible, .edit-item.visible {
+            display: inline-block; /* Change to inline-block for proper margin */
+            opacity: 1; /* Fully visible */
+            transform: translateY(0); /* Reset shift */
+        }
+        input[type="number"] {
+            width: 50px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #11940c;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #036903;
+            transform: scale(1.05);
+        }
+        .cart-button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            z-index: 1000;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+        .modal input, .modal button {
+            width: calc(100% - 20px);
+            margin: 5px 0;
+            padding: 10px;
+        }
+        #add-item-button {
+            background-color: #007bff;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-bottom: 20px; /* Space below the button */
+        }
+        #add-item-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SouthCentral Hardware Distributors Inc.</h1>
+            <nav>
+                <ul>
+                    <li><a href="Shaun1.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="shop">
+            <h2>Shop Our Products</h2>
+            <!-- Initial products will be loaded here from localStorage -->
+        </section>
+
+        <div class="cart-button-container">
+            <button id="add-item-button">Add New Item</button>
+            <button id="done-shopping" class="cart-button">
+                <span class="text">Proceed to Cart</span>
+                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+            </button>
+        </div>
+
+        <!-- Modal for adding a new item -->
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal" id="add-item-modal">
+            <h3>Add New Item</h3>
+            <input type="text" id="new-item-name" placeholder="Item Name">
+            <input type="number" id="new-item-price" placeholder="Price" min="0" step="0.01">
+            <input type="file" id="new-item-photo" accept="image/*">
+            <button id="save-item-button">Save Item</button>
+            <button id="close-modal-button">Cancel</button>
+        </div>
+
+        <!-- Modal for editing an item -->
+        <div class="modal" id="edit-item-modal">
+            <h3>Edit Item</h3>
+            <input type="text" id="edit-item-name" placeholder="Item Name">
+            <input type="number" id="edit-item-price" placeholder="Price" min="0" step="0.01">
+            <input type="file" id="edit-item-photo" accept="image/*">
+            <button id="save-edit-button">Save Changes</button>
+            <button id="close-edit-modal-button">Cancel</button>
+        </div>
+    </main>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+
+        // Load existing products from localStorage when the page loads
+        function loadProducts() {
+            const shop = document.getElementById('shop');
+            shop.innerHTML = ''; // Clear the shop section
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.setAttribute('data-name', product.name);
+                productDiv.setAttribute('data-price', product.price);
+                productDiv.setAttribute('data-photo', product.photo); // Store photo as data attribute
+                productDiv.innerHTML = `
+                    <div class="dot-menu" title="Menu">•••</div>
+                    <img src="${product.photo}" alt="${product.name}" style="max-width: 100%; height: auto;">
+                    <h3>${product.name}</h3>
+                    <p>$${product.price.toFixed(2)}</p>
+                    <input type="number" value="1" min="1" class="quantity">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="delete-item">Delete</button>
+                    <button class="edit-item">Edit</button>
+                `;
+                shop.appendChild(productDiv);
+                
+                // Toggle delete and edit button visibility on dot menu click
+                const dotMenu = productDiv.querySelector('.dot-menu');
+                const deleteButton = productDiv.querySelector('.delete-item');
+                const editButton = productDiv.querySelector('.edit-item');
+                
+                dotMenu.addEventListener('click', () => {
+                    deleteButton.classList.toggle('visible');
+                    editButton.classList.toggle('visible');
+                });
+
+                deleteButton.addEventListener('click', () => {
+                    products = products.filter(p => p.name !== product.name);
+                    localStorage.setItem('products', JSON.stringify(products));
+                    loadProducts(); // Reload products after deletion
+                });
+
+                editButton.addEventListener('click', () => {
+                    document.getElementById('edit-item-name').value = product.name;
+                    document.getElementById('edit-item-price').value = product.price;
+                    document.getElementById('edit-item-photo').value = ''; // Reset photo input
+                    document.getElementById('save-edit-button').onclick = function() {
+                        product.name = document.getElementById('edit-item-name').value;
+                        product.price = parseFloat(document.getElementById('edit-item-price').value);
+                        localStorage.setItem('products', JSON.stringify(products));
+                        loadProducts(); // Reload products after editing
+                    };
+                    document.getElementById('edit-item-modal').style.display = 'block';
+                });
+            });
+        }
+
+        // Check if the user is logged in
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+        // Show or hide the "Add New Item" button based on login status
+        document.getElementById('add-item-button').style.display = isLoggedIn ? 'block' : 'none';
+
+        loadProducts(); // Call the function to load products
+
+        // Add new item modal
+        document.getElementById('add-item-button').onclick = function() {
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('add-item-modal').style.display = 'block';
+        };
+
+        document.getElementById('save-item-button').onclick = function() {
+            const name = document.getElementById('new-item-name').value;
+            const price = parseFloat(document.getElementById('new-item-price').value);
+            const photo = document.getElementById('new-item-photo').files[0];
+
+            if (name && price && photo) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newProduct = {
+                        name: name,
+                        price: price,
+                        photo: e.target.result
+                    };
+                    products.push(newProduct);
+                    localStorage.setItem('products', JSON.stringify(products));
+                    loadProducts();
+                    document.getElementById('modal-overlay').style.display = 'none';
+                    document.getElementById('add-item-modal').style.display = 'none';
+                };
+                reader.readAsDataURL(photo);
+            } else {
+                alert('Please fill out all fields.');
+            }
+        };
+
+        document.getElementById('close-modal-button').onclick = function() {
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('add-item-modal').style.display = 'none';
+        };
+
+        document.getElementById('done-shopping').onclick = function() {
+            window.location.href = 'cart.html'; // Redirect to cart
+        };
+
+        // Close edit modal
+        document.getElementById('close-edit-modal-button').onclick = function() {
+            document.getElementById('edit-item-modal').style.display = 'none';
+        };
+    </script>
+</body>
+</html>
